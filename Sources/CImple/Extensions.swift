@@ -5,7 +5,7 @@ public protocol ImageConvertible {
     var ciImage: CIImage? { get }
 }
 
-protocol FilterConvertible {
+public protocol FilterConvertible {
     var filters: [CIFilter] { get }
 }
 
@@ -87,9 +87,9 @@ extension CIFilter {
 }
 
 extension CIFilter: FilterConvertible {
-    var filters: [CIFilter] { return [self] }
+    public var filters: [CIFilter] { return [self] }
 }
 
 extension Array: FilterConvertible where Element == CIFilter {
-    var filters: [CIFilter] { return self }
+    public var filters: [CIFilter] { return self }
 }
