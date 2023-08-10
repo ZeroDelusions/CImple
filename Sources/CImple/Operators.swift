@@ -9,7 +9,7 @@ infix operator ++: AdditionPrecedence
 infix operator --: AdditionPrecedence
 
 @available(iOS 13.0, *)
-func =>(lhs: ImageConvertible, rhs: FilterConvertible) -> UIImage {
+public func =>(lhs: ImageConvertible, rhs: FilterConvertible) -> UIImage {
     
     let filteredImage = CImple().applyFilters(lhs.ciImage, filters: rhs.filters)
     guard let cgImage = CIContext(options: nil).createCGImage(filteredImage!, from: filteredImage!.extent) else {
@@ -20,7 +20,7 @@ func =>(lhs: ImageConvertible, rhs: FilterConvertible) -> UIImage {
 }
 
 @available(iOS 13.0, *)
-func =>>(lhs: ImageConvertible, rhs: FilterConvertible) -> ImageConvertible {
+public func =>>(lhs: ImageConvertible, rhs: FilterConvertible) -> ImageConvertible {
     
     let filteredImage = CImple().applyFilters(lhs.ciImage, filters: rhs.filters)
     guard let cgImage = CIContext(options: nil).createCGImage(filteredImage!, from: filteredImage!.extent) else {
@@ -40,22 +40,22 @@ func =>>(lhs: ImageConvertible, rhs: FilterConvertible) -> ImageConvertible {
 }
 
 @available(iOS 13.0, *)
-func +(lhs: ImageConvertible, rhs: ImageConvertible) -> UIImage {
+public func +(lhs: ImageConvertible, rhs: ImageConvertible) -> UIImage {
     return applyCompositing(lhs.ciImage, rhs.ciImage, filter: CIFilter.sourceOverCompositing())
 }
 
 @available(iOS 13.0, *)
-func -(lhs: ImageConvertible, rhs: ImageConvertible) -> UIImage {
+public func -(lhs: ImageConvertible, rhs: ImageConvertible) -> UIImage {
     return applyCompositing(lhs.ciImage, rhs.ciImage, filter: CIFilter.sourceOutCompositing())
 }
 
 @available(iOS 13.0, *)
-func ++(lhs: ImageConvertible, rhs: ImageConvertible) -> UIImage {
+public func ++(lhs: ImageConvertible, rhs: ImageConvertible) -> UIImage {
     return applyCompositing(lhs.ciImage, rhs.ciImage, filter: CIFilter.sourceAtopCompositing())
 }
 
 @available(iOS 13.0, *)
-func --(lhs: ImageConvertible, rhs: ImageConvertible) -> UIImage {
+public func --(lhs: ImageConvertible, rhs: ImageConvertible) -> UIImage {
     return applyCompositing(lhs.ciImage, rhs.ciImage, filter: CIFilter.sourceInCompositing())
 }
 
