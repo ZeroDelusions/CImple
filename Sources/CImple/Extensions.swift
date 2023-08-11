@@ -13,17 +13,19 @@ extension UIImage: ImageConvertible {
     public var ciImage: CIImage? { return CIImage(image: self) }
 }
 
-@available(iOS 13.0, *)
-public func processImage<T: ImageConvertible>( _ imageConvertible: T, @FilterBuilder _ instructions: () throws -> Any?) -> Image {
-    if let ciImage = imageConvertible.ciImage {
-        do {
-            let uiImg = try CImple().apply(ciImage, instructions() as! () throws -> Any?)
-            return Image(uiImage: uiImg!)
-        } catch {
-            return imageConvertible as! Image
+extension ImageConvertible {
+    @available(iOS 13.0, *)
+    public func processImage<T: ImageConvertible>( _ imageConvertible: T, @FilterBuilder _ instructions: () throws -> Any?) -> Image {
+        if let ciImage = imageConvertible.ciImage {
+            do {
+                let uiImg = try CImple().apply(ciImage, instructions() as! () throws -> Any?)
+                return Image(uiImage: uiImg!)
+            } catch {
+                return imageConvertible as! Image
+            }
         }
+        return imageConvertible as! Image
     }
-    return imageConvertible as! Image
 }
 
 public protocol FilterConvertible {
