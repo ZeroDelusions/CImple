@@ -40,6 +40,7 @@ extension Array: FilterConvertible where Element == CIFilter {
 @available(iOS 13.0, *)
 extension Image: ImageConvertible {
     public var ciImage: CIImage? { return self.asCIImage() }
+    func ggg() {}
 }
 
 @available(iOS 13.0, *)
