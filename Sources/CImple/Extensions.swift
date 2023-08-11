@@ -28,13 +28,6 @@ extension Array: FilterConvertible where Element == CIFilter {
 @available(iOS 13.0, *)
 extension Image: ImageConvertible {
     public var ciImage: CIImage? { return self.asCIImage() }
-    public func CIApply( @FilterBuilder _ filterClosure: () throws -> Any? ) rethrows -> UIImage? {
-        do {
-            return try CImple().apply(self.ciImage, try filterClosure() as! () throws -> Any?)
-        } catch {
-            return nil
-        }
-    }
 }
 
 @available(iOS 13.0, *)
@@ -65,6 +58,14 @@ extension View {
             return CIImage(image: uiImage)
         }
         return nil
+    }
+    
+    public func CIApply( @FilterBuilder _ filterClosure: () throws -> Any? ) rethrows -> UIImage? {
+        do {
+            return try CImple().apply(self.asCIImage(), try filterClosure() as! () throws -> Any?)
+        } catch {
+            return nil
+        }
     }
     
 }
