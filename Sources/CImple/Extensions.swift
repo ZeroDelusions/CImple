@@ -13,6 +13,18 @@ extension UIImage: ImageConvertible {
     public var ciImage: CIImage? { return CIImage(image: self) }
 }
 
+@available(iOS 13.0, *)
+public func processImage<T: ImageConvertible>( _ imageConvertible: T, @FilterBuilder _ instructions: () throws -> Any?) -> Image {
+    if let ciImage = imageConvertible.ciImage {
+        do {
+            let uiImg = try CImple().apply(ciImage, instructions() as! () throws -> Any?)
+            return Image(uiImage: uiImg!)
+        } catch {
+            return imageConvertible as! Image
+        }
+    }
+    return imageConvertible as! Image
+}
 
 public protocol FilterConvertible {
     var filters: [CIFilter] { get }
@@ -26,42 +38,13 @@ extension Array: FilterConvertible where Element == CIFilter {
     public var filters: [CIFilter] { return self }
 }
 
-//@available(iOS 13.0, *)
-//struct ApplyImageFunction: ViewModifier {
-//    var uiImage: UIImage?
-//    
-//    func body(content: Content) -> some View {
-//        let image = Image(uiImage: uiImage!)
-//        
-//        return image.overlay(content)
-//    }
-//}
-
 @available(iOS 13.0, *)
 extension Image: ImageConvertible {
     public var ciImage: CIImage? { return self.asCIImage() }
 }
 
 @available(iOS 13.0, *)
-struct ImageReplacementModifier: ViewModifier {
-    let condition: Bool
-    let replacementImage: Image
-    
-    func body(content: Content) -> some View {
-        if condition {
-            replacementImage
-        } else {
-            content
-        }
-    }
-}
-
-@available(iOS 13.0, *)
 extension View {
-    
-    func CIApply(condition: Bool, with replacementImage: Image) -> some View {
-            modifier(ImageReplacementModifier(condition: condition, replacementImage: replacementImage))
-        }
     
     public func asUIImage() -> UIImage? {
         let controller = UIHostingController(rootView: self)
