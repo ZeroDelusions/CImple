@@ -5,16 +5,17 @@ public protocol ImageConvertible {
     var ciImage: CIImage? { get }
 }
 
-public protocol FilterConvertible {
-    var filters: [CIFilter] { get }
-}
-
 extension CIImage: ImageConvertible {
     public var ciImage: CIImage? { return self }
 }
 
 extension UIImage: ImageConvertible {
     public var ciImage: CIImage? { return CIImage(image: self) }
+}
+
+
+public protocol FilterConvertible {
+    var filters: [CIFilter] { get }
 }
 
 extension CIFilter: FilterConvertible {
@@ -25,10 +26,23 @@ extension Array: FilterConvertible where Element == CIFilter {
     public var filters: [CIFilter] { return self }
 }
 
+//@available(iOS 13.0, *)
+//struct ApplyImageFunction: ViewModifier {
+//    var uiImage: UIImage?
+//    
+//    func body(content: Content) -> some View {
+//        let image = Image(uiImage: uiImage!)
+//        
+//        return image.overlay(content)
+//    }
+//}
+
 @available(iOS 13.0, *)
 extension Image: ImageConvertible {
     public var ciImage: CIImage? { return self.asCIImage() }
 }
+
+
 
 @available(iOS 13.0, *)
 extension View {
@@ -60,12 +74,17 @@ extension View {
         return nil
     }
     
-    public func CIApply( @FilterBuilder _ filterClosure: () throws -> Any? ) rethrows -> UIImage? {
+//    @ViewBuilder
+    func CIApply( @FilterBuilder _ filterClosure: @escaping () throws -> Any? ) -> (any View)? {
+        
         do {
-            return try CImple().apply(self.asCIImage(), try filterClosure() as! () throws -> Any?)
+            let uiImage = try CImple().apply(self.asCIImage(), filterClosure() as! () throws -> Any?)
+        
+            return AnyView(Image(uiImage: uiImage!))
         } catch {
-            return nil
+            return self
         }
+
     }
     
 }
