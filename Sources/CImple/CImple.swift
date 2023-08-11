@@ -1,5 +1,4 @@
 import Foundation
-import UIKit
 import SwiftUI
 import CoreImage
 import CoreImage.CIFilterBuiltins
@@ -57,10 +56,6 @@ public struct CImple {
         return applyFilters(input?.ciImage, filters: filters)
     }
 
-    public func array( _ input: Any? = nil, @FilterBuilder _ filterClosure: FilterClosure ) -> [CIFilter] {
-        return filterClosure()
-    }
-
     func convertToCIImage( _ input: Any? ) throws -> CIImage? {
         if let unwrappedInput = input {
             if let inputCIImage = unwrappedInput as? CIImage {
@@ -79,7 +74,7 @@ public struct CImple {
         }
     }
 
-    public func applyFilters( _ input: CIImage?, filters: [CIFilter]) -> CIImage? {
+    internal func applyFilters( _ input: CIImage?, filters: [CIFilter]) -> CIImage? {
         
         var filteredImage = input
 

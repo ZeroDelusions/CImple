@@ -27,7 +27,7 @@ enum FilterError: Error {
 }
 
 @available(iOS 13.0, *)
-struct ErrorView: View {
+internal struct ErrorView: View {
     
     var errorMessage: String
     
