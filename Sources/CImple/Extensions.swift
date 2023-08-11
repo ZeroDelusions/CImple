@@ -17,6 +17,14 @@ extension UIImage: ImageConvertible {
     public var ciImage: CIImage? { return CIImage(image: self) }
 }
 
+extension CIFilter: FilterConvertible {
+    public var filters: [CIFilter] { return [self] }
+}
+
+extension Array: FilterConvertible where Element == CIFilter {
+    public var filters: [CIFilter] { return self }
+}
+
 @available(iOS 13.0, *)
 extension Image: ImageConvertible {
     public var ciImage: CIImage? { return self.asCIImage() }
@@ -84,12 +92,4 @@ extension CIFilter {
         
         return self
     }
-}
-
-extension CIFilter: FilterConvertible {
-    public var filters: [CIFilter] { return [self] }
-}
-
-extension Array: FilterConvertible where Element == CIFilter {
-    public var filters: [CIFilter] { return self }
 }
