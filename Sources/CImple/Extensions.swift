@@ -40,31 +40,28 @@ extension Array: FilterConvertible where Element == CIFilter {
 @available(iOS 13.0, *)
 extension Image: ImageConvertible {
     public var ciImage: CIImage? { return self.asCIImage() }
-    func ggg() {}
 }
 
 @available(iOS 13.0, *)
 struct ImageReplacementModifier: ViewModifier {
-    let replacementImage: UIImage
+    let condition: Bool
+    let replacementImage: Image
     
     func body(content: Content) -> some View {
-        
-        Image(uiImage: replacementImage)
-
+        if condition {
+            replacementImage
+        } else {
+            content
+        }
     }
 }
 
 @available(iOS 13.0, *)
 extension View {
     
-    func CIApply(with replacementImage: Image, @FilterBuilder _ instructions: () -> Any?) -> some View {
-        do {
-            modifier(ImageReplacementModifier(replacementImage: try CImple().apply(self.asCIImage(), instructions() as! () throws -> Any?)!))
-        } catch {
-            self
+    func CIApply(condition: Bool, with replacementImage: Image) -> some View {
+            modifier(ImageReplacementModifier(condition: condition, replacementImage: replacementImage))
         }
-        return self
-    }
     
     public func asUIImage() -> UIImage? {
         let controller = UIHostingController(rootView: self)
