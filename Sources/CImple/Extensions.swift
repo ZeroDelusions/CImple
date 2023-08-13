@@ -20,9 +20,10 @@ extension Image: ImageConvertible {
 
 extension ImageConvertible {
     @available(iOS 13.0, *)
-    public func CIChain<T: ImageConvertible>( _ imageConvertible: T, @FilterBuilder _ filterClosure: @escaping () -> [CIFilter] ) -> ImageConvertible {
+    public func ciFilters<T: ImageConvertible>( _ imageConvertible: T, @FilterBuilder _ filterClosure: () -> [CIFilter] ) -> ImageConvertible {
         
         let uiImg = CImple().CIApply(imageConvertible) {filterClosure()}
+//        let uiImg = CImple().CIApply(imageConvertible) {filterClosure()}
         
         if imageConvertible is UIImage {
             return uiImg!
