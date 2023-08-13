@@ -41,11 +41,11 @@ public struct CImple {
             
             if maintainInputType {
                 if input is UIImage {
-                    return input!
+                    return UIImage(cgImage: cgImage)
                 } else if input is CIImage {
-                    return input?.ciImage!
+                    return CIImage(cgImage: cgImage)
                 } else if input is Image {
-                    return Image(uiImage: UIImage(ciImage: (input?.ciImage)!))
+                    return Image(uiImage: UIImage(cgImage: cgImage))
                 }
             }
 
