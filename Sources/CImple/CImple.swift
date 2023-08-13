@@ -10,7 +10,7 @@ public struct CImple {
 
     public init() { }
 
-    internal func filters(_ input: ImageConvertible? = nil, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> UIImage {
+    public func filters(_ input: ImageConvertible? = nil, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> UIImage {
         do {
             let result = try instructions()
 
