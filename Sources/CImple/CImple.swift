@@ -16,11 +16,11 @@ public struct CImple {
 
             let filteredImage: CIImage = try {
                 if let filters = result as? [CIFilter] {
-                    guard let appliedImage = applyFilters(input?.ciImage, filters) else {
-                        throw FilterError.missingInput
-                    }
                     if filters.isEmpty {
                         throw FilterError.missingReturn
+                    }
+                    guard let appliedImage = applyFilters(input?.ciImage, filters) else {
+                        throw FilterError.missingInput
                     }
                     return appliedImage
                 } else if let ciImage = result as? CIImage {
