@@ -17,7 +17,7 @@ extension CIImage: ImageConvertible {
     }
     public func chain( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: FilterClosure ) -> CIImage? {
         let filters = filterClosure()
-        return CImple().applyFilters(input?.ciImage, filters)
+        return CImple().applyFilters(input?.ciImage ?? self, filters)
     }
 }
 
@@ -33,7 +33,7 @@ extension UIImage: ImageConvertible {
     }
     public func chain( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: FilterClosure ) -> CIImage? {
         let filters = filterClosure()
-        return CImple().applyFilters(input?.ciImage, filters)
+        return CImple().applyFilters(input?.ciImage ?? self, filters)
     }
 }
 
@@ -50,7 +50,7 @@ extension Image: ImageConvertible {
     }
     public func chain( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: FilterClosure ) -> CIImage? {
         let filters = filterClosure()
-        return CImple().applyFilters(input?.ciImage, filters)
+        return CImple().applyFilters(input?.ciImage ?? self, filters)
     }
 }
 
