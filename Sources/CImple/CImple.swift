@@ -53,7 +53,8 @@ public struct CImple {
 
     public func chain( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: FilterClosure ) -> CIImage? {
         let filters = filterClosure()
-        return applyFilters(input?.ciImage, filters)
+        let effectiveInput = input ?? filters.compactMap { $0.outputImage }.first
+        return applyFilters(effectiveInput?.ciImage, filters)
     }
 
     func convertToCIImage( _ input: Any? ) throws -> CIImage? {
