@@ -59,7 +59,7 @@ extension CIFilter {
                 }
             }
         } catch {
-            
+            return self
         }
         
         return self
