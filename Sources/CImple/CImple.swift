@@ -3,14 +3,14 @@ import SwiftUI
 import CoreImage
 import CoreImage.CIFilterBuiltins
 
+public typealias FilterClosure = () -> [CIFilter]
+
 @available(iOS 13.0, *)
 public struct CImple {
 
     public init() { }
-    
-    public typealias FilterClosure = () -> [CIFilter]
 
-    public func filters(_ input: ImageConvertible? = nil, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> UIImage? {
+    internal func filters(_ input: ImageConvertible? = nil, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> UIImage? {
         do {
             let result = try instructions()
 
