@@ -44,7 +44,7 @@ extension Image: ImageConvertible {
     @ViewBuilder
     public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: () -> Any? ) -> Image {
         
-        let uiImg = CImple().filters(input, filterClosure)
+        let uiImg = CImple().filters(input ?? self.ciImage, filterClosure)
         
         Image(uiImage: uiImg)
     }
