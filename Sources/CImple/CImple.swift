@@ -28,9 +28,8 @@ public struct CImple {
                         print("Caution: The input within FilterKit() is disregarded when using chaining syntax.")
                     }
                     return ciImage
-//                }
-//                else if result == nil {
-//                    throw FilterError.missingFilterInput
+                } else if result == nil {
+                    throw FilterError.missingFilterInput
                 } else {
                     throw FilterError.unknownError
                 }
@@ -54,8 +53,7 @@ public struct CImple {
 
     public func chain( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: FilterClosure ) -> CIImage? {
         let filters = filterClosure()
-        let effectiveInput = input ?? filters.compactMap { $0.outputImage }.first
-        return applyFilters(effectiveInput?.ciImage, filters)
+        return applyFilters(input?.ciImage, filters)
     }
 
     func convertToCIImage( _ input: Any? ) throws -> CIImage? {
