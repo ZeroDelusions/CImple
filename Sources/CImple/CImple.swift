@@ -8,10 +8,13 @@ public typealias FilterClosure = () -> [CIFilter]
 @available(iOS 13.0, *)
 public struct CImple {
 
+    @State internal var storedInput: ImageConvertible?
+    
     public init() { }
 
     public func filters(_ input: ImageConvertible? = nil, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> UIImage {
         do {
+            storedInput = input
             let result = try instructions()
 
             let filteredImage: CIImage = try {

@@ -33,7 +33,8 @@ extension UIImage: ImageConvertible {
     }
     public func chain( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: FilterClosure ) -> CIImage? {
         let filters = filterClosure()
-        return CImple().applyFilters(input?.ciImage ?? self.ciImage, filters)
+        let effectiveInput = CImple().storedInput ?? input
+        return CImple().applyFilters(effectiveInput?.ciImage ?? self.ciImage, filters)
     }
 }
 
