@@ -19,24 +19,15 @@ extension Image: ImageConvertible {
 }
 
 @available(iOS 13.0, *)
-struct FilteredImage: View {
-    var uiImage: UIImage
+extension View {
     
-    var body: some View {
-        SwiftUI.Image(uiImage: uiImage)
-    }
-}
-
-@available(iOS 13.0, *)
-extension Image {
     @ViewBuilder
-    public func ciFilters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: @escaping () -> Any? ) -> Image {
+    public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: @escaping () -> Any? ) -> Image {
         
-        let uiImg = CImple().CIApply(input, filterClosure)
-                
+        let uiImg = CImple().filters(input, filterClosure)
+        
         Image(uiImage: uiImg!)
 
-        
     }
 }
 

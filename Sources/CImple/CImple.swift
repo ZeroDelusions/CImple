@@ -10,7 +10,7 @@ public struct CImple {
     
     public typealias FilterClosure = () -> [CIFilter]
 
-    public func CIApply(_ input: ImageConvertible? = nil, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> UIImage? {
+    public func filters(_ input: ImageConvertible? = nil, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> UIImage? {
         do {
             let result = try instructions()
 
@@ -51,7 +51,7 @@ public struct CImple {
         }
     }
 
-    public func CIChain( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: FilterClosure ) -> CIImage? {
+    public func chain( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: FilterClosure ) -> CIImage? {
         let filters = filterClosure()
         return applyFilters(input?.ciImage, filters)
     }
