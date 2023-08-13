@@ -10,7 +10,7 @@ public struct CImple {
     
     public typealias FilterClosure = () -> [CIFilter]
 
-    public func apply<T: ImageConvertible>(_ input: T? = nil, _ maintainInputType: Bool = false, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> ImageConvertible? {
+    public func apply<T: ImageConvertible>(_ input: T? = nil, _ maintainInputType: Bool = false, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> T? {
         do {
             let result = try instructions()
 
@@ -41,20 +41,20 @@ public struct CImple {
             
             if maintainInputType {
                 if input is UIImage {
-                    return UIImage(cgImage: cgImage) as UIImage
+                    return UIImage(cgImage: cgImage) as? T
                 } else if input is CIImage {
-                    return CIImage(cgImage: cgImage)
+                    return CIImage(cgImage: cgImage) as? T
                 } else if input is Image {
-                    return Image(uiImage: UIImage(cgImage: cgImage))
+                    return Image(uiImage: UIImage(cgImage: cgImage)) as? T
                 }
             }
 
-            return UIImage(cgImage: cgImage)
+            return UIImage(cgImage: cgImage) as? T
             
         } catch let error as FilterError {
             let errorDescription = "Error: \(error.description)"
             print(errorDescription)
-            return ErrorView(errorMessage: errorDescription).asUIImage()
+            return ErrorView(errorMessage: errorDescription).asUIImage() as? T
         } catch {
             print("\(error): Unknown error")
             return nil
