@@ -10,13 +10,7 @@ public struct CImple {
     
     public typealias FilterClosure = () -> [CIFilter]
 
-    public enum ConvertibleImage {
-        case uiImage(UIImage)
-        case ciImage(CIImage)
-        case image(Image)
-    }
-    
-    public func apply<T: ImageConvertible>(_ input: T? = nil, _ maintainInputType: Bool = false, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> ConvertibleImage? {
+    public func CIApply(_ input: ImageConvertible? = nil, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> UIImage? {
         do {
             let result = try instructions()
 
@@ -44,32 +38,20 @@ public struct CImple {
             guard let cgImage = CIContext(options: nil).createCGImage(filteredImage, from: filteredImage.extent) else {
                 throw FilterError.renderingError
             }
-            
-            if maintainInputType {
-                if let inputImage = input {
-                            if let uiImage = inputImage as? UIImage {
-                                return .uiImage(UIImage(cgImage: cgImage))
-                            } else if let ciImage = inputImage as? CIImage {
-                                return .ciImage(CIImage(cgImage: cgImage))
-                            } else if let image = inputImage as? Image {
-                                return .image(Image(uiImage: UIImage(cgImage: cgImage)))
-                            }
-                        }
-            }
 
-            return .uiImage(UIImage(cgImage: cgImage))
+            return UIImage(cgImage: cgImage)
             
         } catch let error as FilterError {
             let errorDescription = "Error: \(error.description)"
             print(errorDescription)
-            return .uiImage(ErrorView(errorMessage: errorDescription).asUIImage()!)
+            return ErrorView(errorMessage: errorDescription).asUIImage()
         } catch {
             print("\(error): Unknown error")
             return nil
         }
     }
 
-    public func chain( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: FilterClosure ) -> CIImage? {
+    public func CIChain( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: FilterClosure ) -> CIImage? {
         let filters = filterClosure()
         return applyFilters(input?.ciImage, filters)
     }
