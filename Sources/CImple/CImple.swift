@@ -10,7 +10,7 @@ public struct CImple {
 
     public init() { }
 
-    internal func filters(_ input: ImageConvertible? = nil, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> UIImage? {
+    internal func filters(_ input: ImageConvertible? = nil, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> UIImage {
         do {
             let result = try instructions()
 
@@ -44,10 +44,10 @@ public struct CImple {
         } catch let error as FilterError {
             let errorDescription = "Error: \(error.description)"
             print(errorDescription)
-            return ErrorView(errorMessage: errorDescription).asUIImage()
+            return ErrorView(errorMessage: errorDescription).asUIImage()!
         } catch {
             print("\(error): Unknown error")
-            return nil
+            return UIImage()
         }
     }
 

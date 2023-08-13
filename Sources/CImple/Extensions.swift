@@ -13,7 +13,7 @@ extension CIImage: ImageConvertible {
         
         let uiImg = CImple().filters(input ?? self, filterClosure)
         
-        return CIImage(image: uiImg!)
+        return CIImage(image: uiImg)
 
     }
 }
@@ -40,7 +40,7 @@ extension Image: ImageConvertible {
         
         let uiImg = CImple().filters(input ?? self, filterClosure)
         
-        Image(uiImage: uiImg!)
+        Image(uiImage: uiImg)
 
     }
 }
