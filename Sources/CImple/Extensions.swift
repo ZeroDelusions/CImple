@@ -30,11 +30,11 @@ struct FilteredImage: View {
 @available(iOS 13.0, *)
 extension Image {
     @ViewBuilder
-    public func ciFilters( _ input: some View, @FilterBuilder _ filterClosure: @escaping () -> [CIFilter] ) -> some View {
+    public func ciFilters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: @escaping () -> [CIFilter] ) -> some View {
         
-        let uiImg = CImple().CIApply(input.asCIImage()) {filterClosure()}
+        let uiImg = CImple().CIApply(input) {filterClosure()}
         
-        FilteredImage(uiImage: uiImg!)
+        Image(uiImage: uiImg!)
         
     }
 }
