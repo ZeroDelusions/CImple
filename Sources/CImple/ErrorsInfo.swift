@@ -17,7 +17,7 @@ enum FilterError: Error {
         case .missingFilterInput:
             return "Missing input parameter in chaining. Please provide input as a parameter in the main, or chain function, or as a value for the 'kCIInputImageKey'."
         case .missingReturn:
-            return "Missing return value. Ensure you return an image when using the chaining syntax."
+            return "Missing return value or filters. Ensure you return an image."
         case .renderingError:
             return "Error while applying CIFilters."
         case .unknownError:

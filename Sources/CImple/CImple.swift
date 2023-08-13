@@ -16,6 +16,9 @@ public struct CImple {
 
             let filteredImage: CIImage = try {
                 if let filters = result as? [CIFilter] {
+                    if input == nil {
+                        throw FilterError.missingInput
+                    }
                     if filters.isEmpty {
                         throw FilterError.missingReturn
                     }
