@@ -13,7 +13,7 @@ extension ImageConvertible {
     
     static public func =>(lhs: Self, rhs: FilterConvertible) -> Self {
         
-        let filteredImage = CImple().applyFilters(lhs.ciImage, filters: rhs.filters)
+        let filteredImage = CImple().applyFilters(lhs.ciImage, rhs.filters)
         guard let cgImage = CIContext(options: nil).createCGImage(filteredImage!, from: filteredImage!.extent) else {
             return UIImage(ciImage: lhs.ciImage!) as! Self
         }
@@ -23,7 +23,7 @@ extension ImageConvertible {
 
     static public func =>>(lhs: Self, rhs: FilterConvertible) -> Self {
         
-        let filteredImage = CImple().applyFilters(lhs.ciImage, filters: rhs.filters)
+        let filteredImage = CImple().applyFilters(lhs.ciImage, rhs.filters)
         guard let cgImage = CIContext(options: nil).createCGImage(filteredImage!, from: filteredImage!.extent) else {
             return lhs
         }

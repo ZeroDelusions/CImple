@@ -10,7 +10,7 @@ public struct CImple {
     
     public typealias FilterClosure = () -> [CIFilter]
 
-    public func apply(_ input: ImageConvertible? = nil, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> UIImage? {
+    public func apply(_ input: ImageConvertible? = nil, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> ImageConvertible? {
         do {
             let result = try instructions()
 
@@ -19,7 +19,7 @@ public struct CImple {
                     if filters.isEmpty {
                         throw FilterError.missingReturn
                     }
-                    guard let appliedImage = applyFilters(input?.ciImage, filters: filters) else {
+                    guard let appliedImage = applyFilters(input?.ciImage, filters) else {
                         throw FilterError.missingInput
                     }
                     return appliedImage
@@ -38,6 +38,14 @@ public struct CImple {
             guard let cgImage = CIContext(options: nil).createCGImage(filteredImage, from: filteredImage.extent) else {
                 throw FilterError.renderingError
             }
+            
+            if input is UIImage {
+                return input!
+            } else if input is CIImage {
+                return input?.ciImage!
+            } else if input is Image {
+                return Image(uiImage: UIImage(ciImage: (input?.ciImage)!))
+            }
 
             return UIImage(cgImage: cgImage)
             
@@ -53,10 +61,10 @@ public struct CImple {
 
     public func chain( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: FilterClosure ) -> CIImage? {
         let filters = filterClosure()
-        return applyFilters(input?.ciImage, filters: filters)
+        return applyFilters(input?.ciImage, filters)
     }
 
-    func convertToCIImage( _ input: Any? ) throws -> CIImage? {
+    internal func convertToCIImage( _ input: Any? ) throws -> CIImage? {
         if let unwrappedInput = input {
             if let inputCIImage = unwrappedInput as? CIImage {
                 return inputCIImage
@@ -74,7 +82,7 @@ public struct CImple {
         }
     }
 
-    internal func applyFilters( _ input: CIImage?, filters: [CIFilter]) -> CIImage? {
+    internal func applyFilters( _ input: CIImage?, _ filters: [CIFilter]) -> CIImage? {
         
         var filteredImage = input
 

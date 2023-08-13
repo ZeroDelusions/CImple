@@ -13,6 +13,11 @@ extension UIImage: ImageConvertible {
     public var ciImage: CIImage? { return CIImage(image: self) }
 }
 
+@available(iOS 13.0, *)
+extension Image: ImageConvertible {
+    public var ciImage: CIImage? { return self.asCIImage() }
+}
+
 extension ImageConvertible {
     @available(iOS 13.0, *)
     public func processImage<T: ImageConvertible>( _ imageConvertible: T, @FilterBuilder _ filterClosure: @escaping () -> [CIFilter] ) -> ImageConvertible {
@@ -42,11 +47,6 @@ extension CIFilter: FilterConvertible {
 
 extension Array: FilterConvertible where Element == CIFilter {
     public var filters: [CIFilter] { return self }
-}
-
-@available(iOS 13.0, *)
-extension Image: ImageConvertible {
-    public var ciImage: CIImage? { return self.asCIImage() }
 }
 
 @available(iOS 13.0, *)
@@ -89,11 +89,6 @@ extension UIView {
             layer.render(in: rendererContext.cgContext)
         }
     }
-}
-
-@available(iOS 13.0, *)
-extension Image {
-    
 }
 
 @available(iOS 13.0, *)
