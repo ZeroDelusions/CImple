@@ -28,7 +28,7 @@ struct FilteredImage: View {
 }
 
 @available(iOS 13.0, *)
-extension View {
+extension Image {
     @ViewBuilder
     public func ciFilters( _ input: some View, @FilterBuilder _ filterClosure: @escaping () -> [CIFilter] ) -> some View {
         
