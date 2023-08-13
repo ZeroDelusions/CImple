@@ -56,7 +56,7 @@ public struct CImple {
         return applyFilters(input?.ciImage, filters)
     }
 
-    internal func convertToCIImage( _ input: Any? ) throws -> CIImage? {
+    func convertToCIImage( _ input: Any? ) throws -> CIImage? {
         if let unwrappedInput = input {
             if let inputCIImage = unwrappedInput as? CIImage {
                 return inputCIImage

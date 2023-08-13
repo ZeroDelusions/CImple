@@ -22,7 +22,7 @@ extension Image: ImageConvertible {
 extension View {
     
     @ViewBuilder
-    public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: @escaping () -> Any? ) -> Image {
+    public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: () -> Any? ) -> Image {
         
         let uiImg = CImple().filters(input, filterClosure)
         

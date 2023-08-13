@@ -56,7 +56,7 @@ extension ImageConvertible {
         return applyCompositing(lhs.ciImage, rhs.ciImage, filter: CIFilter.sourceInCompositing())
     }
 
-    static private func applyCompositing(_ background: CIImage?, _ input: CIImage?, filter: CIFilter) -> UIImage {
+    static private func applyCompositing( _ background: CIImage?, _ input: CIImage?, filter: CIFilter ) -> UIImage {
         
         filter.setValue(background, forKey: kCIInputBackgroundImageKey)
         filter.setValue(input, forKeyPath: kCIInputImageKey)
