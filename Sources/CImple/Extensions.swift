@@ -18,24 +18,24 @@ extension Image: ImageConvertible {
     public var ciImage: CIImage? { return self.asCIImage() }
 }
 
-extension ImageConvertible {
-    @available(iOS 13.0, *)
-    public func processImage<T: ImageConvertible>( _ imageConvertible: T, @FilterBuilder _ filterClosure: @escaping () -> [CIFilter] ) -> ImageConvertible {
-        
-        let uiImg = CImple().apply(imageConvertible) {filterClosure()}
-        
-        if imageConvertible is UIImage {
-            return uiImg!
-        } else if imageConvertible is CIImage {
-            return imageConvertible.ciImage!
-        } else if imageConvertible is Image {
-            return Image(uiImage: UIImage(ciImage: imageConvertible.ciImage!))
-        }
-        
-        return imageConvertible
-        
-    }
-}
+//extension ImageConvertible {
+//    @available(iOS 13.0, *)
+//    public func processImage<T: ImageConvertible>( _ imageConvertible: T, @FilterBuilder _ filterClosure: @escaping () -> [CIFilter] ) -> ImageConvertible {
+//        
+//        let uiImg = CImple().apply(imageConvertible) {filterClosure()}
+//        
+//        if imageConvertible is UIImage {
+//            return uiImg!
+//        } else if imageConvertible is CIImage {
+//            return imageConvertible.ciImage!
+//        } else if imageConvertible is Image {
+//            return Image(uiImage: UIImage(ciImage: imageConvertible.ciImage!))
+//        }
+//        
+//        return imageConvertible
+//        
+//    }
+//}
 
 public protocol FilterConvertible {
     var filters: [CIFilter] { get }

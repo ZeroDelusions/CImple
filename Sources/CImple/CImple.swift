@@ -10,7 +10,13 @@ public struct CImple {
     
     public typealias FilterClosure = () -> [CIFilter]
 
-    public func apply<T: ImageConvertible>(_ input: T? = nil, _ maintainInputType: Bool = false, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> ImageConvertible? {
+    public enum ConvertibleImage {
+        case uiImage(UIImage)
+        case ciImage(CIImage)
+        case image(Image)
+    }
+    
+    public func apply<T: ImageConvertible>(_ input: T? = nil, _ maintainInputType: Bool = false, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> ConvertibleImage? {
         do {
             let result = try instructions()
 
@@ -41,22 +47,22 @@ public struct CImple {
             
             if maintainInputType {
                 if let inputImage = input {
-                    if let uiImage = inputImage as? UIImage {
-                        return UIImage(cgImage: cgImage) as ImageConvertible
-                    } else if let ciImage = inputImage as? CIImage {
-                        return CIImage(cgImage: cgImage) as ImageConvertible
-                    } else if let image = inputImage as? Image {
-                        return Image(uiImage: UIImage(cgImage: cgImage)) as ImageConvertible
-                    }
-                }
+                            if let uiImage = inputImage as? UIImage {
+                                return .uiImage(UIImage(cgImage: cgImage))
+                            } else if let ciImage = inputImage as? CIImage {
+                                return .ciImage(CIImage(cgImage: cgImage))
+                            } else if let image = inputImage as? Image {
+                                return .image(Image(uiImage: UIImage(cgImage: cgImage)))
+                            }
+                        }
             }
 
-            return UIImage(cgImage: cgImage)
+            return .uiImage(UIImage(cgImage: cgImage))
             
         } catch let error as FilterError {
             let errorDescription = "Error: \(error.description)"
             print(errorDescription)
-            return ErrorView(errorMessage: errorDescription).asUIImage()
+            return .uiImage(ErrorView(errorMessage: errorDescription).asUIImage()!)
         } catch {
             print("\(error): Unknown error")
             return nil
