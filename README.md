@@ -35,7 +35,7 @@ import CImple
 
 With CImple, you have a variety of options to choose from for implementing the usage of CIFilters.
 
-The main and basic way is to use:
+The main func is:
 
 ```Swift
 .filters() {
@@ -43,9 +43,11 @@ The main and basic way is to use:
 }
 ```
 
-<p align="center">
-  Yexyyx
-</p>
+Here is a simple footnote[^1].
+
+A footnote can also have multiple lines[^2].
+
+
 
 ```Swift
 struct ContentView: View {
@@ -57,3 +59,7 @@ struct ContentView: View {
     }
 }
 ```
+
+[^1]: My reference.
+[^2]: To add line breaks within a footnote, prefix new lines with 2 spaces.
+  This is a second line.
