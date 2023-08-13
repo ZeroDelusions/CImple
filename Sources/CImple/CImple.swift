@@ -10,7 +10,7 @@ public struct CImple {
     
     public typealias FilterClosure = () -> [CIFilter]
 
-    public func apply(_ input: ImageConvertible? = nil, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> ImageConvertible? {
+    public func apply<T: ImageConvertible>(_ input: T? = nil, _ maintainInputType: Bool = false, @FilterBuilder _ instructions: () throws -> Any?) rethrows -> ImageConvertible? {
         do {
             let result = try instructions()
 
@@ -39,12 +39,14 @@ public struct CImple {
                 throw FilterError.renderingError
             }
             
-            if input is UIImage {
-                return input!
-            } else if input is CIImage {
-                return input?.ciImage!
-            } else if input is Image {
-                return Image(uiImage: UIImage(ciImage: (input?.ciImage)!))
+            if maintainInputType {
+                if input is UIImage {
+                    return input!
+                } else if input is CIImage {
+                    return input?.ciImage!
+                } else if input is Image {
+                    return Image(uiImage: UIImage(ciImage: (input?.ciImage)!))
+                }
             }
 
             return UIImage(cgImage: cgImage)
