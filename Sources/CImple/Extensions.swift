@@ -16,10 +16,6 @@ extension UIImage: ImageConvertible {
 @available(iOS 13.0, *)
 extension Image: ImageConvertible {
     public var ciImage: CIImage? { return self.asCIImage() }
-}
-
-@available(iOS 13.0, *)
-extension Image {
     
     @ViewBuilder
     public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: () -> Any? ) -> Image {
@@ -30,6 +26,12 @@ extension Image {
 
     }
 }
+
+//@available(iOS 13.0, *)
+//extension Image {
+//
+//
+//}
 
 public protocol FilterConvertible {
     var filters: [CIFilter] { get }
