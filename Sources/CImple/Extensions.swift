@@ -20,7 +20,7 @@ extension Image: ImageConvertible {
 
 extension ImageConvertible {
     @available(iOS 13.0, *)
-    public func processImage<T: ImageConvertible>( _ imageConvertible: T, @FilterBuilder _ filterClosure: @escaping () -> [CIFilter] ) -> ImageConvertible {
+    public func CIChain<T: ImageConvertible>( _ imageConvertible: T, @FilterBuilder _ filterClosure: @escaping () -> [CIFilter] ) -> ImageConvertible {
         
         let uiImg = CImple().CIApply(imageConvertible) {filterClosure()}
         
@@ -47,6 +47,29 @@ extension CIFilter: FilterConvertible {
 
 extension Array: FilterConvertible where Element == CIFilter {
     public var filters: [CIFilter] { return self }
+}
+
+@available(iOS 13.0, *)
+extension CIFilter {
+    public func params(_ parameters: [String: Any]) -> Self {
+        do {
+            for (key, value) in parameters {
+                if key == kCIInputImageKey {
+                    if let ciImage = try CImple().convertToCIImage(value) {
+                        setValue(ciImage, forKey: key)
+                    } else {
+                        throw FilterError.renderingError
+                    }
+                } else {
+                    setValue(value, forKey: key)
+                }
+            }
+        } catch {
+            
+        }
+        
+        return self
+    }
 }
 
 @available(iOS 13.0, *)
@@ -88,28 +111,5 @@ extension UIView {
         return renderer.image { rendererContext in
             layer.render(in: rendererContext.cgContext)
         }
-    }
-}
-
-@available(iOS 13.0, *)
-extension CIFilter {
-    func params(_ parameters: [String: Any]) -> Self {
-        do {
-            for (key, value) in parameters {
-                if key == kCIInputImageKey {
-                    if let ciImage = try CImple().convertToCIImage(value) {
-                        setValue(ciImage, forKey: key)
-                    } else {
-                        throw FilterError.renderingError
-                    }
-                } else {
-                    setValue(value, forKey: key)
-                }
-            }
-        } catch {
-            
-        }
-        
-        return self
     }
 }
