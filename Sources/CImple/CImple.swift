@@ -42,11 +42,11 @@ public struct CImple {
             if maintainInputType {
                 if let inputImage = input {
                     if let uiImage = inputImage as? UIImage {
-                        return UIImage(cgImage: cgImage)
+                        return UIImage(cgImage: cgImage) as ImageConvertible
                     } else if let ciImage = inputImage as? CIImage {
-                        return CIImage(cgImage: cgImage)
+                        return CIImage(cgImage: cgImage) as ImageConvertible
                     } else if let image = inputImage as? Image {
-                        return Image(uiImage: UIImage(cgImage: cgImage))
+                        return Image(uiImage: UIImage(cgImage: cgImage)) as ImageConvertible
                     }
                 }
             }
