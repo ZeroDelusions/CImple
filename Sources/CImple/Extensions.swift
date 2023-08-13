@@ -28,11 +28,11 @@ struct FilteredImage: View {
 }
 
 @available(iOS 13.0, *)
-extension Image {
+extension View {
     @ViewBuilder
-    public func ciFilters<T: ImageConvertible>( _ imageConvertible: T, @FilterBuilder _ filterClosure: @escaping () -> [CIFilter] ) -> some View {
+    public func ciFilters( _ input: some View, @FilterBuilder _ filterClosure: @escaping () -> [CIFilter] ) -> some View {
         
-        let uiImg = CImple().CIApply(imageConvertible) {filterClosure()}
+        let uiImg = CImple().CIApply(input.asCIImage()) {filterClosure()}
         
         FilteredImage(uiImage: uiImg!)
         
