@@ -41,16 +41,12 @@ extension UIImage: ImageConvertible {
 extension Image: ImageConvertible {
     public var ciImage: CIImage? { return self.asCIImage() }
     
-    
-    public func filters( _ input: ImageConvertible? = nil, applyImmediately: Bool = false, @FilterBuilder _ filterClosure: () -> Any? ) -> Image {
+    @ViewBuilder
+    public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: () -> Any? ) -> Image {
         
-        if applyImmediately {
-            let uiImg = CImple().filters(input ?? self, filterClosure)
-            return Image(uiImage: uiImg)
-        } else {
-            return self
-        }
+        let uiImg = CImple().filters(input, filterClosure)
         
+        Image(uiImage: uiImg)
     }
     public func chain( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: FilterClosure ) -> CIImage? {
         let filters = filterClosure()
