@@ -28,8 +28,9 @@ public struct CImple {
                         print("Caution: The input within FilterKit() is disregarded when using chaining syntax.")
                     }
                     return ciImage
-                } else if result == nil {
-                    throw FilterError.missingFilterInput
+//                }
+//                else if result == nil {
+//                    throw FilterError.missingFilterInput
                 } else {
                     throw FilterError.unknownError
                 }
