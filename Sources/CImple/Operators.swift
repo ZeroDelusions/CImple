@@ -15,7 +15,6 @@ extension ImageConvertible {
         
         let filteredImage = CImple().applyFilters(lhs.ciImage, rhs.filters)
         guard let cgImage = CIContext(options: nil).createCGImage(filteredImage!, from: filteredImage!.extent) else {
-            print("ll")
             return UIImage(ciImage: lhs.ciImage!) as! Self
         }
         return UIImage(cgImage: cgImage) as! Self
