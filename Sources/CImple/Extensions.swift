@@ -42,11 +42,15 @@ extension Image: ImageConvertible {
     public var ciImage: CIImage? { return self.asCIImage() }
     
     
-    public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: () -> Any? ) -> Image {
+    public func filters( _ input: ImageConvertible? = nil, applyImmediately: Bool = false, @FilterBuilder _ filterClosure: () -> Any? ) -> Image {
         
-        let uiImg = CImple().filters(input ?? self, filterClosure)
+        if applyImmediately {
+            let uiImg = CImple().filters(input ?? self, filterClosure)
+            return Image(uiImage: uiImg)
+        } else {
+            return self
+        }
         
-        return Image(uiImage: uiImg)
     }
     public func chain( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: FilterClosure ) -> CIImage? {
         let filters = filterClosure()
