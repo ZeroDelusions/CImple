@@ -5,12 +5,30 @@ public protocol ImageConvertible {
     var ciImage: CIImage? { get }
 }
 
+@available(iOS 13.0, *)
 extension CIImage: ImageConvertible {
     public var ciImage: CIImage? { return self }
+    
+    public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: () -> Any? ) -> CIImage? {
+        
+        let uiImg = CImple().filters(input ?? self, filterClosure)
+        
+        return CIImage(image: uiImg!)
+
+    }
 }
 
+@available(iOS 13.0, *)
 extension UIImage: ImageConvertible {
     public var ciImage: CIImage? { return CIImage(image: self) }
+    
+    public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: () -> Any? ) -> UIImage? {
+        
+        let uiImg = CImple().filters(input ?? self, filterClosure)
+        
+        return uiImg
+
+    }
 }
 
 @available(iOS 13.0, *)
@@ -26,12 +44,6 @@ extension Image: ImageConvertible {
 
     }
 }
-
-//@available(iOS 13.0, *)
-//extension Image {
-//
-//
-//}
 
 public protocol FilterConvertible {
     var filters: [CIFilter] { get }
