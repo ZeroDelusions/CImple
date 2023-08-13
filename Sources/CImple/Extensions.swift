@@ -19,7 +19,7 @@ extension Image: ImageConvertible {
 }
 
 @available(iOS 13.0, *)
-extension View {
+extension Image {
     
     @ViewBuilder
     public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: () -> Any? ) -> Image {
