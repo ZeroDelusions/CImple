@@ -23,7 +23,7 @@ struct FilteredImage: View {
     var uiImage: UIImage
     
     var body: some View {
-        Image(uiImage: uiImage)
+        SwiftUI.Image(uiImage: uiImage)
     }
 }
 
