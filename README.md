@@ -6,6 +6,8 @@ CImple is a SwiftUI package designed to simplify the usage of Core Image filters
 
 
 
+
+
 ## Features
 
 - Different 
@@ -70,7 +72,7 @@ var body: some View {
         .scaledToFit()
     
     Button("Apply filters) {
-        uiImg = uiImg.filters {
+        uiImg = uiImg?.filters {
             CIFilter.colorInvert()
         }
     }
@@ -79,17 +81,53 @@ var body: some View {
 
 </td>
 <td>
-
 <picture>
-    
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/ZeroDelusions/CImple/assets/121663433/8c655484-d80a-4937-b614-5f9789e06456">
-  <img alt="Shows an illustrated sun in light color mode and a moon with stars in dark color mode." src="https://github.com/ZeroDelusions/CImple/assets/121663433/2a9706ee-1bd0-42f7-8cff-6509a083206c">
+  <img src="https://github.com/ZeroDelusions/CImple/assets/121663433/2a9706ee-1bd0-42f7-8cff-6509a083206c">
 </picture>
-
 </td>
 </tr>
 </table>
 
+>[!Warning]
+>Applying filters that 'extend' size of image, like `gaussianBlur()`, `bloom()`, ect, on `@State` and assign it to itself will result in gradual decrease of image, like in case of 
+>```Swift
+>@State var uiImg = UIImage(named: "your-image")
+>//...
+>uiImg = uiImg?.filters() {
+>    CIFilter.gaussianBlur()
+>}
+>```
+
+### Chaining syntax
+
+CImple provides more advanced syntax for cases when it's needed to 'save' result of CIFilters for later usage. Inside `.filters()`:
+
+```Swift
+uiImg = CImple().filters() {
+    let invertAndBlur = uiImg.chain() {
+        CIFilter.colorInvert()
+        CIFilter.gaussianBlur()
+    }
+    let bloom = invertAndBlur.chain() {
+        CIFilter.bloom().params([
+            kCIInputIntensityKey: 0.5,
+            kCIInputRadiusKey: 20
+        ])
+    } 
+    return bloom
+}
+```
+
 >[!Note]
-> hh
+>Result of chain could also be used as parameter for singular filter outside of chain. Then there is no need for `return`
+> ```Swift
+>   //...
+>   CIFilter.bloom().params([
+>       kCIInputImageKey: invertAndBlur,
+>       kCIInputIntensityKey: 0.5,
+>       kCIInputRadiusKey: 20
+>   ])
+>}
+>```
 
