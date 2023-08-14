@@ -90,7 +90,7 @@ var body: some View {
 </table>
 
 >[!Warning]
->Applying filters that 'extend' size of image, like `gaussianBlur()`, `bloom()`, ect, on `@State` and assign it to itself will result in gradual decrease of image, like in case of 
+>Applying filters that 'extend' size of image, like `.gaussianBlur()`, `.bloom()`, ect, on `@State` and assign it to itself will result in gradual decrease of image, like in case of 
 >```Swift
 >@State var uiImg = UIImage(named: "your-image")
 >//...
@@ -98,6 +98,21 @@ var body: some View {
 >    CIFilter.gaussianBlur()
 >}
 >```
+
+### Filter parameters
+
+Parameters are applied by using `.params()` as extension to CIFilter. List of keys you can find on <a url="https://developer.apple.com/documentation/coreimage/cifilter/filter_parameter_keys">official Apple website</a>
+
+```Swift
+CIFilter.bloom().params([
+    kCIInputImageKey: invertAndBlur,
+    kCIInputIntensityKey: 0.5,
+    kCIInputRadiusKey: 20
+])
+```
+
+>[!Note]
+>`kCIInputImageKey` passed to filter will override input for `.filters()` or `.chain()` funcs.
 
 ### Chaining syntax
 
