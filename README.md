@@ -81,6 +81,10 @@ It accepts:
 
 
 
+https://github.com/ZeroDelusions/CImple/assets/121663433/4cc150b6-d8a2-470b-bce2-bc62afe26a6f
+
+
+
 
 Or addressed by calling `CImple()` struct:
 
