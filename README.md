@@ -157,48 +157,60 @@ uiImg = CImple().filters() {
 <tr>
 <td>=></td>
 <td>
+
 Apply `CIFilter` or `[CIFilter]` to image, returns `UIImage`
 `image => [CIFilter.colorInvert(), CIFilter.gaussianBlur()]`
+
 </td>
 </tr>
 
 <tr>
 <td>=>></td>
 <td>
+
 Apply `CIFilter` or `[CIFilter]` to image, returns input type
 `image => [CIFilter.colorInvert(), CIFilter.gaussianBlur()]`
+
 </td>
 </tr>
 
 <tr>
 <td>+</td>
 <td>
+
 Combine two images using `.sourceOverCompositing()`
 `image = image + uiImage`
+
 </td>
 </tr>
 
 <tr>
 <td>-</td>
 <td>
+
 Combine two images using `.sourceOutCompositing()`
 `image = image - uiImage`
+
 </td>
 </tr>
 
 <tr>
 <td><+></td>
 <td>
+
 Combine two images using `.sourceAtopCompositing()` (lhs: background, rhs: input)
 `image = image <+> uiImage`
+
 </td>
 </tr>
 
 <tr>
 <td><-></td>
 <td>
+
 Combine two images using `.sourceInCompositing()` (lhs: background, rhs: input)
 `image = image <-> uiImage`
+
 </td>
 </tr>
 </table>
