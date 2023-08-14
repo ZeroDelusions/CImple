@@ -58,6 +58,10 @@ Image("your-image")
 
 >[!Note]
 >Make sure to apply filters before any image modifier.
+>```.filter() {
+>CIFilter.colorInvert() 
+>}
+>```
 
 Beside using func inside view, it can apply filters on variables.
 
