@@ -80,8 +80,9 @@ It accepts:
 
 
 
+![ezgif com-video-to-gif](https://github.com/ZeroDelusions/CImple/assets/121663433/2a9706ee-1bd0-42f7-8cff-6509a083206c)
 
-https://github.com/ZeroDelusions/CImple/assets/121663433/4cc150b6-d8a2-470b-bce2-bc62afe26a6f
+
 
 
 
