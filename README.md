@@ -73,9 +73,8 @@ var body: some View {
         }
     }
 }
-```
-
-![ezgif com-video-to-gif](https://github.com/ZeroDelusions/CImple/assets/121663433/2a9706ee-1bd0-42f7-8cff-6509a083206c)
+``` 
+![ezgif com-video-to-gif](https://github.com/ZeroDelusions/CImple/assets/121663433/2a9706ee-1bd0-42f7-8cff-6509a083206c){: style="width:400"}
 
 >[!Note]
 > hh
