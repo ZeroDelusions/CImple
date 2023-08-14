@@ -116,7 +116,7 @@ CIFilter.bloom().params([
 
 ### Chaining syntax
 
-CImple provides more advanced syntax for cases when it's needed to 'save' result of CIFilters for later usage. Inside `.filters()`:
+CImple provides more advanced syntax for cases when it's needed to 'save' result of CIFilters for later usage. `.chain()` function works by the same rules as `.filters()`
 
 ```Swift
 uiImg = CImple().filters() {
@@ -145,4 +145,61 @@ uiImg = CImple().filters() {
 >   ])
 >}
 >```
+
+### Custom operators
+
+<table>
+<tr>
+<td>Operator</td>
+<td>Functionality</td>
+</tr>
+
+<tr>
+<td>=></td>
+<td>
+Apply `CIFilter` or `[CIFilter]` to image, returns `UIImage`
+`image => [CIFilter.colorInvert(), CIFilter.gaussianBlur()]`
+</td>
+</tr>
+
+<tr>
+<td>=>></td>
+<td>
+Apply `CIFilter` or `[CIFilter]` to image, returns input type
+`image => [CIFilter.colorInvert(), CIFilter.gaussianBlur()]`
+</td>
+</tr>
+
+<tr>
+<td>+</td>
+<td>
+Combine two images using `.sourceOverCompositing()`
+`image = image + uiImage`
+</td>
+</tr>
+
+<tr>
+<td>-</td>
+<td>
+Combine two images using `.sourceOutCompositing()`
+`image = image - uiImage`
+</td>
+</tr>
+
+<tr>
+<td><+></td>
+<td>
+Combine two images using `.sourceAtopCompositing()` (lhs: background, rhs: input)
+`image = image <+> uiImage`
+</td>
+</tr>
+
+<tr>
+<td><-></td>
+<td>
+Combine two images using `.sourceInCompositing()` (lhs: background, rhs: input)
+`image = image <-> uiImage`
+</td>
+</tr>
+</table>
 
