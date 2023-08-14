@@ -35,20 +35,69 @@ import CImple
 
 With CImple, you have a variety of options to choose from for implementing the usage of CIFilters.
 
-The main func is:
+First thing to know
+
+The main func is `.filters()`:
 
 ```Swift
-.filters() {
-    // Here you place CIFilters
-}
+Image("your-image")
+    .filters(/* optional image */) {
+        // Here you place CIFilters
+    }
+```
+> It can apply CIFilters directly onto Image(). If image passed as parameter, it would use it instead.
+
+### Closure
+
+It accepts:
+
+<table>
+<tr>
+<td> CIFilter... </td> <td> [CIFilter] </td> <td> [CIFilter] + CIFilter... </td>
+</tr>
+<tr>
+<td> 
+
+```Swift
+    .filters() {
+        CIFilter.colorInvert()
+        CIFilter.gaussianBlur()
+    }
 ```
 
-Here is a simple footnote[^1].
+</td>
+<td>
 
-A footnote can also have multiple lines[^2].
+```Swift
+    .filters() {
+        [
+            CIFilter.colorInvert()
+            CIFilter.gaussianBlur()
+        ]
+    }
+```
+
+</td>
+<td>
+
+```Swift
+    .filters() {
+        [
+            CIFilter.colorInvert()
+            CIFilter.gaussianBlur()
+        ]
+        CIFilter.bloom()
+    }
+```
+
+</td>
+</tr>
+</table>
 
 
-[^1]:
+
+Or addressed by calling `CImple()` struct:
+
 ```Swift
 struct ContentView: View {
     var body: some View {
@@ -59,7 +108,3 @@ struct ContentView: View {
     }
 }
 ```
-
-[^1]: My reference.
-[^2]: To add line breaks within a footnote, prefix new lines with 2 spaces.
-  This is a second line.
