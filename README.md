@@ -79,8 +79,12 @@ var body: some View {
 
 </td>
 <td>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/ZeroDelusions/CImple/assets/121663433/3c6a2670-ab92-49b4-beec-5d104e432377">
+</picture>
     
-![ezgif com-video-to-gif](https://github.com/ZeroDelusions/CImple/assets/121663433/3c6a2670-ab92-49b4-beec-5d104e432377)
+![ezgif com-video-to-gif]()
 
 </td>
 </tr>
