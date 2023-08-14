@@ -39,66 +39,36 @@ With CImple, you have a variety of options to choose from for implementing the u
 
 First thing to know
 
-The main func is `.filters()`:
+The main func is `.filters()`. <br>It can apply CIFilters directly onto Image() inside body. If other image passed as parameter, it would be used instead. Closure accepts as variadic param `CIFilter...`, so as `[CIFilter]`, and combination of both of them:
 
 ```Swift
 Image("your-image")
-    .filters(/* optional image */) {
-        // Here you place CIFilters
-    }
-```
-It can apply CIFilters directly onto Image(). <br> If image passed as parameter, it would use it instead. Closure accepts inputs as variadic param `CIFilter...`, so as `[CIFilter]`, and combination of both of them:
-
-<table>
-<tr>
-<td> CIFilter... </td>
-<td>
-
-```Swift
-    .filters() {
-        CIFilter.colorInvert()
-        CIFilter.gaussianBlur()
-    }
-```
-
-</td>
-<td>
-</tr>
-
-<tr>
-<td> [CIFilter] </td>
-<td>
-
-```Swift
-    .filters() {
+    .filters(/* optional image here */) {
         [
-            CIFilter.colorInvert()
-            CIFilter.gaussianBlur()
-        ]
-    }
-```
-
-</td>
-<td>
-</tr>
-
-<tr>
-<td> [CIFilter] + CIFilter... </td>
-<td>
-
-```Swift
-    .filters() {
-        [
-            CIFilter.colorInvert()
+            CIFilter.colorInvert(),
             CIFilter.gaussianBlur()
         ]
         CIFilter.bloom()
+        CIFilter.vignette()
+        // ...
     }
+    .resizable()
+    .scaledToFit()
 ```
 
-</td>
-</tr>
-</table>
+>[!Note]
+>Make sure to apply filters before any image modifier.
+
+Beside using func inside view, it can apply filters on variables.
+
+```Swift
+@State var uiImg = UIImage(named: "your-image")
+
+var body: some View {
+    Image(uiImage: uiImg!)
+
+}
+```
 
 ### Closure
 
