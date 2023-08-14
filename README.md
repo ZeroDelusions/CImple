@@ -37,13 +37,11 @@ import CImple
 
 With CImple, you have a variety of options to choose from for implementing the usage of CIFilters.
 
-First thing to know
-
-The main func is `.filters()`. <br>It can apply CIFilters directly onto Image() inside body. If other image passed as parameter, it would be used instead. Closure accepts as variadic param `CIFilter...`, so as `[CIFilter]`, and combination of both of them:
+The main func is `.filters()`. <br>It can apply CIFilters directly onto Image() inside body, on its appearence. If other image passed as parameter, it would be used instead and assigned to Image(). Closure accepts as variadic param `CIFilter...`, so as `[CIFilter]`, and combination of both of them:
 
 ```Swift
 Image("your-image")
-    .filters(/* optional image here */) {
+    .filters(/* optionally image here */) {
         [
             CIFilter.colorInvert(),
             CIFilter.gaussianBlur()
@@ -57,11 +55,7 @@ Image("your-image")
 ```
 
 >[!Note]
->Make sure to apply filters before any image modifier.
->```.filter() {
->CIFilter.colorInvert() 
->}
->```
+>Make sure to apply `.filters()` before any image modifier, like `.resizable()`, ect.
 
 Beside using func inside view, it can apply filters on variables.
 
@@ -70,32 +64,19 @@ Beside using func inside view, it can apply filters on variables.
 
 var body: some View {
     Image(uiImage: uiImg!)
-
-}
-```
-
-### Closure
-
-It accepts:
-
-
-
-![ezgif com-video-to-gif](https://github.com/ZeroDelusions/CImple/assets/121663433/2a9706ee-1bd0-42f7-8cff-6509a083206c)
-
-
-
-
-
-
-Or addressed by calling `CImple()` struct:
-
-```Swift
-struct ContentView: View {
-    var body: some View {
-        Image("your-image")
-            .filters() {
-
-            }
+        .resizable()
+        .scaledToFit()
+    
+    Button("Apply filters) {
+        uiImg = uiImg.filters {
+            CIFilter.colorInvert()
+        }
     }
 }
 ```
+
+![ezgif com-video-to-gif](https://github.com/ZeroDelusions/CImple/assets/121663433/2a9706ee-1bd0-42f7-8cff-6509a083206c)
+
+>[!Note]
+> hh
+
