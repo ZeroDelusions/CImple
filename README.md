@@ -6,8 +6,6 @@ CImple is a SwiftUI package designed to simplify the usage of Core Image filters
 
 
 
-
-
 ## Features
 
 - Different 
