@@ -101,7 +101,7 @@ var body: some View {
 
 ### Filter parameters
 
-Parameters are applied by using `.params()` as extension to CIFilter. List of keys you can find on <a url="https://developer.apple.com/documentation/coreimage/cifilter/filter_parameter_keys">official Apple website</a>
+Parameters are applied by using `.params()` as extension to CIFilter. List of keys you can find on <a href="https://developer.apple.com/documentation/coreimage/cifilter/filter_parameter_keys">official Apple website</a>
 
 ```Swift
 CIFilter.bloom().params([
