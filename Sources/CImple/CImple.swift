@@ -25,7 +25,7 @@ public struct CImple {
                     return appliedImage
                 } else if let ciImage = result as? CIImage {
                     if input != nil {
-                        print("Caution: The input within FilterKit() is disregarded when using chaining syntax.")
+                        print("Caution: The input within filters() is disregarded when using chaining syntax.")
                     }
                     return ciImage
                 } else if result == nil {

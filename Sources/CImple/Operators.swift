@@ -5,8 +5,8 @@ infix operator =>: AdditionPrecedence
 infix operator =>>: AdditionPrecedence
 infix operator +: AdditionPrecedence
 infix operator -: AdditionPrecedence
-infix operator ++: AdditionPrecedence
-infix operator --: AdditionPrecedence
+infix operator <+>: AdditionPrecedence
+infix operator <->: AdditionPrecedence
 
 @available(iOS 13.0, *)
 extension ImageConvertible {
@@ -48,11 +48,11 @@ extension ImageConvertible {
         return applyCompositing(lhs.ciImage, rhs.ciImage, filter: CIFilter.sourceOutCompositing())
     }
 
-    static public func ++(lhs: Self, rhs: Self) -> UIImage {
+    static public func <+>(lhs: Self, rhs: Self) -> UIImage {
         return applyCompositing(lhs.ciImage, rhs.ciImage, filter: CIFilter.sourceAtopCompositing())
     }
 
-    static public func --(lhs: Self, rhs: Self) -> UIImage {
+    static public func <->(lhs: Self, rhs: Self) -> UIImage {
         return applyCompositing(lhs.ciImage, rhs.ciImage, filter: CIFilter.sourceInCompositing())
     }
 
