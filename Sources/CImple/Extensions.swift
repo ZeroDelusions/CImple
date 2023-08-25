@@ -59,7 +59,7 @@ extension View {
     public var ciImage: CIImage? { return self.asCIImage() }
     
     @ViewBuilder
-    public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: () -> Any? ) -> Image {
+    public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: () -> Any? ) -> any View {
         
         let uiImg = CImple().filters(input ?? self.ciImage, filterClosure)
         
