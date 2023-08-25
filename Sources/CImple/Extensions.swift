@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 
+
 public protocol ImageConvertible {
     var ciImage: CIImage? { get }
 }
