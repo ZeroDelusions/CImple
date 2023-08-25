@@ -54,6 +54,23 @@ extension Image: ImageConvertible {
     }
 }
 
+@available(iOS 13.0, *)
+extension View {
+    public var ciImage: CIImage? { return self.asCIImage() }
+    
+    @ViewBuilder
+    public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: () -> Any? ) -> any View {
+        
+        let uiImg = CImple().filters(input ?? self.ciImage, filterClosure)
+        
+        Image(uiImage: uiImg)
+    }
+    public func chain( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: FilterClosure ) -> CIImage? {
+        let filters = filterClosure()
+        return CImple().applyFilters(input?.ciImage ?? self.ciImage, filters)
+    }
+}
+
 public protocol FilterConvertible {
     var filters: [CIFilter] { get }
 }
