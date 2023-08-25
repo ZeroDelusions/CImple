@@ -111,23 +111,17 @@ extension View {
     
     public func asUIImage() -> UIImage? {
         let controller = UIHostingController(rootView: self)
+        let view = controller.view
         
-        controller.view.backgroundColor = .clear
+        let targetSize = controller.view.intrinsicContentSize
+        view?.bounds = CGRect(origin: .zero, size: targetSize)
+        view?.backgroundColor = .clear
         
-        controller.view.frame = CGRect(x: 0, y: CGFloat(Int.max), width: 1, height: 1)
-        UIApplication.shared.windows.first?.rootViewController?.view.addSubview(controller.view)
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
         
-        let size = controller.sizeThatFits(in: UIScreen.main.bounds.size)
-        controller.view.bounds = CGRect(origin: .zero, size: size)
-        controller.view.sizeToFit()
-        
-        guard let uiImage = controller.view.asUIImage() else {
-            return nil
+        return renderer.image { _ in
+            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
         }
-        
-        controller.view.removeFromSuperview()
-        
-        return uiImage
     }
     
     public func asCIImage() -> CIImage? {
