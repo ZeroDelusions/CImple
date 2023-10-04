@@ -3,11 +3,13 @@ import SwiftUI
 
 public protocol ImageConvertible {
     var ciImage: CIImage? { get }
+    var uiImage: UIImage? { get }
 }
 
 @available(iOS 13.0, *)
 extension CIImage: ImageConvertible {
     public var ciImage: CIImage? { return self }
+    public var uiImage: UIImage? { return UIImage(ciImage: self) }
     
     public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: () -> Any? ) -> CIImage? {
         
@@ -24,6 +26,7 @@ extension CIImage: ImageConvertible {
 @available(iOS 13.0, *)
 extension UIImage: ImageConvertible {
     public var ciImage: CIImage? { return CIImage(image: self) }
+    public var uiImage: UIImage? { return self }
     
     public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: () -> Any? ) -> UIImage? {
         
@@ -40,6 +43,7 @@ extension UIImage: ImageConvertible {
 @available(iOS 13.0, *)
 extension Image: ImageConvertible {
     public var ciImage: CIImage? { return self.asCIImage() }
+    public var uiImage: UIImage? { return self.asUIImage() }
     
     @ViewBuilder
     public func filters( _ input: ImageConvertible? = nil, @FilterBuilder _ filterClosure: () -> Any? ) -> Image {

@@ -38,8 +38,7 @@ public struct CImple {
             guard let cgImage = CIContext(options: nil).createCGImage(filteredImage, from: filteredImage.extent) else {
                 throw FilterError.renderingError
             }
-
-            return UIImage(cgImage: cgImage)
+            return UIImage(cgImage: cgImage, scale: (input?.uiImage?.scale) ?? 1.0, orientation: (input?.uiImage?.imageOrientation) ?? .up )
             
         } catch let error as FilterError {
             let errorDescription = "Error: \(error.description)"
