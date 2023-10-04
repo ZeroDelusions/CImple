@@ -85,7 +85,7 @@ extension Array: FilterConvertible where Element == CIFilter {
 
 @available(iOS 13.0, *)
 extension CIFilter {
-    func params(_ parameters: [PartialKeyPath<CIFilter>: Any]) -> Self {
+    public func params(_ parameters: [PartialKeyPath<CIFilter>: Any]) -> Self {
         do {
             for (keyPath, value) in parameters {
                 if let key = keyPath._kvcKeyPathString {
