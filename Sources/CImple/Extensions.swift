@@ -85,17 +85,15 @@ extension Array: FilterConvertible where Element == CIFilter {
 
 @available(iOS 13.0, *)
 extension CIFilter {
-    public func params(_ parameters: [String: Any]) -> Self {
+    func params(_ parameters: [PartialKeyPath<CIFilter>: Any]) -> Self {
         do {
-            for (key, value) in parameters {
-                if key == kCIInputImageKey {
+            for (keyPath, value) in parameters {
+                if let key = keyPath._kvcKeyPathString {
                     if let ciImage = try CImple().convertToCIImage(value) {
                         setValue(ciImage, forKey: key)
                     } else {
                         throw FilterError.renderingError
                     }
-                } else {
-                    setValue(value, forKey: key)
                 }
             }
         } catch {
