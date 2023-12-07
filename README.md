@@ -10,10 +10,9 @@ CImple is a SwiftUI package designed to simplify the usage of Core Image filters
 
 ## Features
 
-- Different 
-- Live previews
-- Fullscreen mode
-- Cross platform
+- Easy to understand syntax
+- Custom infix operators
+- Live update of image applying filters
 
 
 ## Begin using
@@ -82,7 +81,7 @@ var body: some View {
 </td>
 <td>
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/ZeroDelusions/CImple/assets/121663433/8c655484-d80a-4937-b614-5f9789e06456">
+  <source media="" srcset="https://github.com/ZeroDelusions/CImple/assets/121663433/8c655484-d80a-4937-b614-5f9789e06456">
   <img src="https://github.com/ZeroDelusions/CImple/assets/121663433/2a9706ee-1bd0-42f7-8cff-6509a083206c">
 </picture>
 </td>
@@ -158,7 +157,7 @@ uiImg = CImple().filters() {
 <td>=></td>
 <td>
 
-Apply `CIFilter` or `[CIFilter]` to image, returns `UIImage`
+Apply `CIFilter` or `[CIFilter]` to image, returns `UIImage` (lhs: background, rhs: input)
 `image => [CIFilter.colorInvert(), CIFilter.gaussianBlur()]`
 
 </td>
@@ -168,7 +167,7 @@ Apply `CIFilter` or `[CIFilter]` to image, returns `UIImage`
 <td>=>></td>
 <td>
 
-Apply `CIFilter` or `[CIFilter]` to image, returns input type
+Apply `CIFilter` or `[CIFilter]` to image, returns input type (lhs: background, rhs: input)
 `image => [CIFilter.colorInvert(), CIFilter.gaussianBlur()]`
 
 </td>
@@ -178,7 +177,7 @@ Apply `CIFilter` or `[CIFilter]` to image, returns input type
 <td>+</td>
 <td>
 
-Combine two images using `.sourceOverCompositing()`
+Combine two images using `.sourceOverCompositing()` (lhs: background, rhs: input)
 `image = image + uiImage`
 
 </td>
@@ -188,7 +187,7 @@ Combine two images using `.sourceOverCompositing()`
 <td>-</td>
 <td>
 
-Combine two images using `.sourceOutCompositing()`
+Combine two images using `.sourceOutCompositing()` (lhs: background, rhs: input)
 `image = image - uiImage`
 
 </td>
