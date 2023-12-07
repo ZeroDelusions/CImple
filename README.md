@@ -70,7 +70,7 @@ var body: some View {
         .resizable()
         .scaledToFit()
     
-    Button("Apply filters) {
+    Button("Apply filters") {
         uiImg = uiImg?.filters {
             CIFilter.colorInvert()
         }
