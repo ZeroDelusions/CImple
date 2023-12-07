@@ -157,7 +157,7 @@ uiImg = CImple().filters() {
 <td>=></td>
 <td>
 
-Apply `CIFilter` or `[CIFilter]` to image, returns `UIImage` (lhs: background, rhs: input)
+Apply `CIFilter` or `[CIFilter]` to image, returns `UIImage` (lhs: background, rhs: input) \
 `image => [CIFilter.colorInvert(), CIFilter.gaussianBlur()]`
 
 </td>
@@ -167,7 +167,7 @@ Apply `CIFilter` or `[CIFilter]` to image, returns `UIImage` (lhs: background, r
 <td>=>></td>
 <td>
 
-Apply `CIFilter` or `[CIFilter]` to image, returns input type (lhs: background, rhs: input)
+Apply `CIFilter` or `[CIFilter]` to image, returns input type (lhs: background, rhs: input) \
 `image => [CIFilter.colorInvert(), CIFilter.gaussianBlur()]`
 
 </td>
@@ -177,7 +177,7 @@ Apply `CIFilter` or `[CIFilter]` to image, returns input type (lhs: background, 
 <td>+</td>
 <td>
 
-Combine two images using `.sourceOverCompositing()` (lhs: background, rhs: input)
+Combine two images using `.sourceOverCompositing()` (lhs: background, rhs: input) \
 `image = image + uiImage`
 
 </td>
@@ -187,7 +187,7 @@ Combine two images using `.sourceOverCompositing()` (lhs: background, rhs: input
 <td>-</td>
 <td>
 
-Combine two images using `.sourceOutCompositing()` (lhs: background, rhs: input)
+Combine two images using `.sourceOutCompositing()` (lhs: background, rhs: input) \
 `image = image - uiImage`
 
 </td>
@@ -197,7 +197,7 @@ Combine two images using `.sourceOutCompositing()` (lhs: background, rhs: input)
 <td><+></td>
 <td>
 
-Combine two images using `.sourceAtopCompositing()` (lhs: background, rhs: input)
+Combine two images using `.sourceAtopCompositing()` (lhs: background, rhs: input) \
 `image = image <+> uiImage`
 
 </td>
@@ -207,7 +207,7 @@ Combine two images using `.sourceAtopCompositing()` (lhs: background, rhs: input
 <td><-></td>
 <td>
 
-Combine two images using `.sourceInCompositing()` (lhs: background, rhs: input)
+Combine two images using `.sourceInCompositing()` (lhs: background, rhs: input) \
 `image = image <-> uiImage`
 
 </td>
