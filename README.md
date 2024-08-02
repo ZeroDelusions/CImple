@@ -89,11 +89,13 @@ var body: some View {
 </td>
 <td>
 <picture>
-  <source media="" srcset="https://github.com/ZeroDelusions/CImple/assets/121663433/8c655484-d80a-4937-b614-5f9789e06456">
-  <img src="https://github.com/ZeroDelusions/CImple/assets/121663433/2a9706ee-1bd0-42f7-8cff-6509a083206c">
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/a498745f-9d0f-4498-8647-69ab5a6909d3">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/0af0fe02-9929-4832-8f34-d9c6f9a08417">
+  <img src="https://github.com/user-attachments/assets/a498745f-9d0f-4498-8647-69ab5a6909d3">
 </picture>
 </td>
 </tr>
+
 </table>
 
 >[!Warning]
