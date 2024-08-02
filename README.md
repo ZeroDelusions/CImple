@@ -49,12 +49,20 @@ Image("your-image")
         CIFilter.vignette()
         // ...
     }
-    .resizable()
-    .scaledToFit()
 ```
 
->[!Note]
->Make sure to apply `.filters()` before any image modifier, like `.resizable()`, ect.
+It's possible to use flow statements inside `.filters()` closure:
+
+```Swift
+Image("your-image")
+    .filters() {
+        if applyFilters {
+            // ...
+        } else {
+             // ...
+        }
+    }
+```
 
 Beside using func inside view, it can apply filters on variables.
 
