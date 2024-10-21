@@ -8,13 +8,6 @@
 import Foundation
 import SwiftUI
 
-//
-//  FilteredImageView.swift
-//
-//
-//  Created by Косоруков Дмитро on 01/08/2024.
-//
-
 @available(iOS 14.0, *)
 struct FilteredImageView<Content: View>: View {
     let content: Content

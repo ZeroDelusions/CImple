@@ -1,5 +1,6 @@
 import SwiftUI
 
+/// Errors that can occur during filter application.
 enum FilterError: Error {
     case wrongInputType
     case missingInput
@@ -28,6 +29,7 @@ extension FilterError: LocalizedError {
     }
 }
 
+/// A view that displays an error message with an icon.
 @available(iOS 13.0, *)
 internal struct ErrorView: View {
     
