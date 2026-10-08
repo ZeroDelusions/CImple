@@ -1,11 +1,7 @@
 
 # CImple
 
-CImple is a SwiftUI package designed to simplify the usage of Core Image filters (CIFilters) within your SwiftUI projects. It provides a set of convenient extensions and utility functions that make it easy to apply and chain CIFilters to images in a declarative and intuitive way.
-
-
-
-
+CImple is a SwiftUI package designed to simplify the usage of Core Image filters (CIFilters) within your SwiftUI projects. It provides a set of extensions and utility functions that make it easy to apply and chain CIFilters to images in an intuitive way.
 
 
 ## Features
